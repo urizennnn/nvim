@@ -67,5 +67,6 @@ return require('packer').startup(function(use)
 	use 'nvim-lua/plenary.nvim'
 	use {'akinsho/toggleterm.nvim' , tag = '*',config = function() require('toggleterm').setup()
 	end}
+	use 'github/copilot.vim'
 end)
 
