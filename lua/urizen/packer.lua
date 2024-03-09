@@ -33,7 +33,7 @@ return require('packer').startup(function(use)
 	}
 
 	use 'hrsh7th/cmp-nvim-lsp'
-	use 'L3MON4D3/LuaSnip'	
+	use 'L3MON4D3/LuaSnip'
 	use {'hrsh7th/nvim-cmp', requires = {'hrsh7th/vim-vsnip'}}
 	use 'neoclide/coc.nvim'
 	use 'vim-airline/vim-airline'
@@ -49,20 +49,23 @@ return require('packer').startup(function(use)
 		requires = {'nvim-tree/nvim-web-devicons'}
 	}
 	use {
-  'VonHeikemen/lsp-zero.nvim',
-  branch = 'v3.x',
-  requires = {
-    --- Uncomment the two plugins below if you want to manage the language servers from neovim
-    -- {'williamboman/mason.nvim'},
-    -- {'williamboman/mason-lspconfig.nvim'},
+		'VonHeikemen/lsp-zero.nvim',
+		branch = 'v3.x',
+		requires = {
+			--- Uncomment the two plugins below if you want to manage the language servers from neovim
+			-- {'williamboman/mason.nvim'},
+			-- {'williamboman/mason-lspconfig.nvim'},
 
-	-- LSP Support
-	{'neovim/nvim-lspconfig'},
-	-- Autocompletion
-	{'hrsh7th/nvim-cmp'},
-	{'hrsh7th/cmp-nvim-lsp'},
-	{'L3MON4D3/LuaSnip'},
-}
-}
+			-- LSP Support
+			{'neovim/nvim-lspconfig'},
+			-- Autocompletion
+			{'hrsh7th/nvim-cmp'},
+			{'hrsh7th/cmp-nvim-lsp'},
+			{'L3MON4D3/LuaSnip'},
+		}
+	}
+	use 'nvim-lua/plenary.nvim'
+	use {'akinsho/toggleterm.nvim' , tag = '*',config = function() require('toggleterm').setup()
+	end}
 end)
 
