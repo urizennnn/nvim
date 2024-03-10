@@ -69,8 +69,4 @@ return require('packer').startup(function(use)
 	end}
 	use 'github/copilot.vim'
 	use 'nvim-lua/popup.nvim'
-	use 'theHamsta/nvim-dap-virtual-text'
-	use 'leoluz/nvim-dap-go'
-	use 'mfussenegger/nvim-dap'
-	use 'rcarriga/nvim-dap-ui'
 end)
