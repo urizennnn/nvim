@@ -69,4 +69,11 @@ return require('packer').startup(function(use)
 	end}
 	use 'github/copilot.vim'
 	use 'nvim-lua/popup.nvim'
+	use ({
+	"aurum77/live-server.nvim",
+	run = function()
+		require"live-server.util".install()
+	end,
+	cmd = {"LiveServer", "LiveServerStop", "LiveServerStart"}
+	})
 end)
