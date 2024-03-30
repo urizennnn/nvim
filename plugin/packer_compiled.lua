@@ -107,6 +107,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\Victor\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\dashboard-nvim",
     url = "https://github.com/nvimdev/dashboard-nvim"
   },
+  ["eslint.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Victor\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\eslint.nvim",
+    url = "https://github.com/MunifTanjim/eslint.nvim"
+  },
   harpoon = {
     loaded = true,
     path = "C:\\Users\\Victor\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\harpoon",
@@ -134,6 +139,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\Victor\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Victor\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -210,6 +220,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\Victor\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-vsnip",
     url = "https://github.com/hrsh7th/vim-vsnip"
+  },
+  ["vim-wakatime"] = {
+    loaded = true,
+    path = "C:\\Users\\Victor\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-wakatime",
+    url = "https://github.com/wakatime/vim-wakatime"
   }
 }
 
