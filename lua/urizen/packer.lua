@@ -80,5 +80,7 @@ return require('packer').startup(function(use)
 	use 'wakatime/vim-wakatime'
 	use 'MunifTanjim/eslint.nvim'
 	use 'jose-elias-alvarez/null-ls.nvim'
+	use {'tjdevries/nlua.nvim'}
+	use 'cdelledonne/vim-cmake'
 end)
 

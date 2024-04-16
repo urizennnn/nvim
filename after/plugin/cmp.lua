@@ -5,6 +5,6 @@ local cmp = require('cmp')
 
 cmp.setup({
 mapping= {
-['<Tab>'] = cmp.mapping.confirm({select=true})
+['<Enter>'] = cmp.mapping.confirm({select=true})
 }
 })
