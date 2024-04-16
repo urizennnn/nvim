@@ -25,7 +25,13 @@ return require('packer').startup(function(use)
 	use {'theprimeagen/harpoon'}
 	use 'mbbill/undotree'
 	use 'tpope/vim-fugitive'
-	use 'neovim/nvim-lspconfig'
+	use {'neovim/nvim-lspconfig',
+	config = function()
+		local lspconfig = require'lspconfig'
+		lspconfig.tsserver.setup{}
+		lspconig.clangd.setup{}
+	end
+}
 	use {
 		"williamboman/mason.nvim"
 	}
