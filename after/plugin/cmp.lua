@@ -1,10 +1,7 @@
-local cmp = require('cmp')
-
-
-
+local cmp = require("cmp")
 
 cmp.setup({
-mapping= {
-['<Enter>'] = cmp.mapping.confirm({select=true})
-}
+	mapping = {
+		["<Enter>"] = cmp.mapping.confirm({ select = true }),
+	},
 })
