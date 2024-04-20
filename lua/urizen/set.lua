@@ -1,5 +1,4 @@
-vim.opt.number = true
-vim.api.nvim_set_option("relativenumber", true)
+--:w
 -- vim.opt.relativenumber = true
 vim.opt.autoindent = true
 vim.opt.tabstop = 4
