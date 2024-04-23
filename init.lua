@@ -162,6 +162,7 @@ require("lazy").setup({
 	{
 		"MunifTanjim/eslint.nvim",
 	},
+{'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
 	{
 		"nvim-tree/nvim-tree.lua",
 		version = "*",
