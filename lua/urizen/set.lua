@@ -1,4 +1,5 @@
 --:w
+vim.opt.cursorline = false
 vim.opt.relativenumber = true
 vim.opt.autoindent = true
 vim.opt.tabstop = 4
@@ -8,7 +9,6 @@ vim.opt.softtabstop = 4
 vim.opt.mouse = "n"
 vim.cmd("autocmd VimEnter * Explore")
 
-vim.opt.cursorline = false
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true
