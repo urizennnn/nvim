@@ -6,8 +6,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smarttab = true
 vim.opt.softtabstop = 4
-vim.opt.mouse = "n"
-vim.cmd("autocmd VimEnter * Explore")
+vim.opt.mouse = ""
 
 vim.opt.swapfile = false
 vim.opt.backup = false
