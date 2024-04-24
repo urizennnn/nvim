@@ -1,9 +1,9 @@
 local bufferline = require("bufferline")
 bufferline.setup({
 	options = {
-		mode = "buffers",
+		mode = "tabs",
 		style_preset = bufferline.style_preset.default,
-		numbers = "both",
+		numbers = "ordinal",
 		buffer_close_icon = "󰅖",
 		modified_icon = "●",
 		close_icon = "",
@@ -13,7 +13,7 @@ bufferline.setup({
 		max_prefix_length = 15,
 		truncate_names = true,
 		tab_size = 18,
-		diagnostics = "nvim_lsp" ,
+		diagnostics = "nvim_lsp",
 		offsets = {
 			{
 				filetype = "Nvimtree",
@@ -22,7 +22,7 @@ bufferline.setup({
 				text_align = "left",
 			},
 		},
-		separator_style = "slant",
+		separator_style = "slope",
 		diagnostics_indicator = function(count, level, diagnostics_dict)
 			local s = " "
 			for e, n in pairs(diagnostics_dict) do
