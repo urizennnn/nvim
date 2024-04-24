@@ -1,3 +1,11 @@
+vim.cmd([[
+    highlight NvimTreeFolderIcon guifg=#FFFF00
+    highlight NvimTreeOpenedFolderIcon guifg=#c6d0f5
+    highlight NvimTreeEmptyFolderName guifg=#c6d0f5
+    highlight NvimTreeOpenedFolderName guifg=#c6d0f5
+    highlight NvimTreeFolderName guifg=#c6d0f5
+]])
+
 require("nvim-tree").setup({
 	sort = {
 		sorter = "case_sensitive",
