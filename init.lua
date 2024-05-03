@@ -1,5 +1,4 @@
 require("urizen")
-
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
@@ -9,7 +8,10 @@ vim.opt.termguicolors = true -- Set <space> as the leader key
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.opt.clipboard = "unnamedplus"
 
+-- FOR WINDOWS
+-- vim.opt.clipboard=unname
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 -- [[ Setting options ]]
