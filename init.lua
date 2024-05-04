@@ -144,8 +144,7 @@ require("lazy").setup({
 	--
 	-- Use `opts = {}` to force a plugin to be loaded.
 	--
-	--  This is equivalent to:
-	--    require('Comment').setup({})
+	{ "rmagatti/auto-session", config = true },
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	-- "gc" to comment visual regions/lines
 	{ "numToStr/Comment.nvim", opts = {} },

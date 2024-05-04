@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>x", "<cmd> :bdelete <cr>")
 vim.keymap.set("n", "<leader>", vim.cmd.NvimTreeToggle)
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
