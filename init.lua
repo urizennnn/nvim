@@ -75,7 +75,7 @@ vim.opt.scrolloff = 10
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("i", "jj", "<Esc>")
+vim.keymap.set("i", "jk", "<Esc>")
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
@@ -91,11 +91,11 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- -- TIP: Disable arrow keys in normal mode
+-- vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -143,7 +143,58 @@ require("lazy").setup({
 	-- keys can be used to configure plugin behavior/loading/etc.
 	--
 	-- Use `opts = {}` to force a plugin to be loaded.
+	-- {
+	-- 	"christoomey/vim-tmux-navigator",
+	-- 	cmd = {
+	-- 		"TmuxNavigateLeft",
+	-- 		"TmuxNavigateDown",
+	-- 		"TmuxNavigateUp",
+	-- 		"TmuxNavigateRight",
+	-- 		"TmuxNavigatePrevious",
+	-- 	},
+	-- 	keys = {
+	-- 		{ "<A-l>", "<cmd><C-Space>TmuxNavigateLeft<cr>" },
+	-- 		{ "<A-d>", "<cmd><C-Space>TmuxNavigateDown<cr>" },
+	-- 		{ "<A-u>", "<cmd><C-Space>TmuxNavigateUp<cr>" },
+	-- 		{ "<A-r>", "<cmd><C-Space>TmuxNavigateRight<cr>" },
+	-- 		{ "<c-\\>", "<cmd><C-Space>TmuxNavigatePrevious<cr>" },
+	-- 	},
+	-- },
+	-- {
+	-- 	"epwalsh/obsidian.nvim",
+	-- 	version = "*", -- recommended, use latest release instead of latest commit
+	-- 	lazy = true,
+	-- 	ft = "markdown",
+	-- 	-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+	-- 	-- event = {
+	-- 	--   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+	-- 	--   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+	-- 	--   "BufReadPre path/to/my-vault/**.md",
+	-- 	--   "BufNewFile path/to/my-vault/**.md",
+	-- 	-- },
+	-- 	dependencies = {
+	-- 		-- Required.
+	-- 		"nvim-lua/plenary.nvim",
 	--
+	-- 		-- see below for full list of optional dependencies 👇
+	-- 	},
+	-- 	opts = {
+	-- 		opts = {
+	-- 			workspaces = {
+	-- 				{
+	-- 					name = "personal",
+	-- 					path = "~/vaults/personal",
+	-- 				},
+	-- 				{
+	-- 					name = "work",
+	-- 					path = "~/vaults/work",
+	-- 				},
+	-- 			},
+	--
+	-- 			-- see below for full list of options 👇
+	-- 		},
+	-- 	},
+	-- },
 	{ "rmagatti/auto-session", config = true },
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	-- "gc" to comment visual regions/lines
@@ -151,6 +202,12 @@ require("lazy").setup({
 
 	{
 		"github/copilot.vim",
+	},
+	{
+		"mfussenegger/nvim-dap",
+	},
+	{
+		"mfussenegger/nvim-dap-ui",
 	},
 	{
 		"folke/trouble.nvim",
@@ -221,6 +278,7 @@ require("lazy").setup({
 	{
 		"MunifTanjim/eslint.nvim",
 	},
+	{ "simrat39/rust-tools.nvim" },
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -404,7 +462,7 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-			vim.keymap.set("n", "<Enter>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
@@ -575,7 +633,8 @@ require("lazy").setup({
 				gopls = {},
 				pyright = {},
 				tsserver = {},
-				-- rust_analyzer = {},
+				rust_analyzer = {},
+				golangci_lint_ls = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:

@@ -1,6 +1,6 @@
 require("toggleterm").setup({
 	size = 20,
-	open_mapping = [[?]],
+	open_mapping = [[<C-n>]],
 	hide_numbers = true,
 	shade_filetypes = {},
 	shade_terminals = true,

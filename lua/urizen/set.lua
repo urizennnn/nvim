@@ -8,6 +8,7 @@ vim.opt.smarttab = true
 vim.opt.softtabstop = 4
 vim.opt.mouse = ""
 
+vim.opt.wrap = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true

@@ -22,8 +22,8 @@ bufferline.setup({
 				text_align = "left",
 			},
 		},
-		separator_style = "slope",
-		diagnostics_indicator = function(count, level, diagnostics_dict)
+		separator_style = "slant",
+		diagnostics_indicator = function(_, _, diagnostics_dict)
 			local s = " "
 			for e, n in pairs(diagnostics_dict) do
 				local sym = e == "error" and " " or (e == "warning" and " " or "")

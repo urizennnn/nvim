@@ -35,3 +35,5 @@ require("lspconfig").clangd.setup({
 	single_file = true,
 	single_file_support = true,
 })
+require("lspconfig").golangci_lint_ls.setup({})
+require("lspconfig").rust_analyzer.setup({})
