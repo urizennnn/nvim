@@ -1,15 +1,12 @@
 require("urizen")
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
 -- optionally enable 24-bit colour
-vim.opt.termguicolors = true -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.clipboard = "unnamedplus"
-
 -- FOR WINDOWS
 -- vim.opt.clipboard=unname
 -- Set to true if you have a Nerd Font installed
@@ -210,63 +207,12 @@ require("lazy").setup({
 		"mfussenegger/nvim-dap-ui",
 	},
 	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			position = "bottom", -- position of the list can be: bottom, top, left, right
-			height = 10, -- height of the trouble list when position is top or bottom
-			width = 50, -- width of the list when position is left or right
-			icons = true, -- use devicons for filenames
-			mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
-			severity = nil, -- nil (ALL) or vim.diagnostic.severity.ERROR | WARN | INFO | HINT
-			fold_open = "", -- icon used for open folds
-			fold_closed = "", -- icon used for closed folds
-			group = true, -- group results by file
-			padding = true, -- add an extra new line on top of the list
-			cycle_results = true, -- cycle item list when reaching beginning or end of list
-			action_keys = { -- key mappings for actions in the trouble list
-				-- map to {} to remove a mapping, for example:
-				-- close = {},
-				close = "q", -- close the list
-				cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-				refresh = "r", -- manually refresh
-				jump = { "<cr>", "<tab>", "<2-leftmouse>" }, -- jump to the diagnostic or open / close folds
-				open_split = { "<c-x>" }, -- open buffer in new split
-				open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-				open_tab = { "<c-t>" }, -- open buffer in new tab
-				jump_close = { "o" }, -- jump to the diagnostic and close the list
-				toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-				switch_severity = "s", -- switch "diagnostics" severity filter level to HINT / INFO / WARN / ERROR
-				toggle_preview = "P", -- toggle auto_preview
-				hover = "K", -- opens a small popup with the full multiline message
-				preview = "p", -- preview the diagnostic location
-				open_code_href = "c", -- if present, open a URI with more information about the diagnostic error
-				close_folds = { "zM", "zm" }, -- close all folds
-				open_folds = { "zR", "zr" }, -- open all folds
-				toggle_fold = { "zA", "za" }, -- toggle fold of current file
-				previous = "k", -- previous item
-				next = "j", -- next item
-				help = "?", -- help menu
-			},
-			multiline = true, -- render multi-line messages
-			indent_lines = true, -- add an indent guide below the fold icons
-			win_config = { border = "single" }, -- window configuration for floating windows. See |nvim_open_win()|.
-			auto_open = false, -- automatically open the list when you have diagnostics
-			auto_close = false, -- automatically close the list when you have no diagnostics
-			auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
-			auto_fold = false, -- automatically fold a file trouble list at creation
-			auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
-			include_declaration = { "lsp_references", "lsp_implementations", "lsp_definitions" }, -- for the given modes, include the declaration of the current symbol in the results
-			signs = {
-				-- icons / text used for a diagnostic
-				error = "",
-				warning = "",
-				hint = "",
-				information = "",
-				other = "",
-			},
-			use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
-		},
 	},
 	{
 		"nvim-lualine/lualine.nvim",
@@ -364,19 +310,6 @@ require("lazy").setup({
 
 	-- NOTE: Plugins can also be configured to run Lua code when they are loaded.
 	--
-	-- This is often very useful to both group configuration, as well as handle
-	-- lazy loading plugins that don't need to be loaded immediately at startup.
-	--
-	-- For example, in the following configuration, we use:
-	--  event = 'VimEnter'
-	--
-	-- which loads which-key before all the UI elements are loaded. Events can be
-	-- normal autocommands events (`:help autocmd-events`).
-	--
-	-- Then, because we use the `config` key, the configuration only runs
-	-- after the plugin has been loaded:
-	--  config = function() ... end
-
 	-- NOTE: Plugins can specify dependencies.
 	--
 	-- The dependencies are proper plugin specifications as well - anything
@@ -458,11 +391,11 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+			vim.keymap.set("n", "lg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-			vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<Enter>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
