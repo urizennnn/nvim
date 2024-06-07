@@ -7,23 +7,9 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.clipboard = "unnamedplus"
--- FOR WINDOWS
--- vim.opt.clipboard=unname
--- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
--- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
 
--- Make line numbers default
 vim.opt.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
-
--- Disable highlighting
--- Don't show the mode, since it's already in the status line
 vim.opt.showmode = true
 
 -- Sync clipboard between OS and Neovim.
@@ -63,13 +49,8 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
 
--- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
-
--- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("i", "jk", "<Esc>")
@@ -272,6 +253,16 @@ require("lazy").setup({
 		end,
 		requires = {
 			"nvim-tree/nvim-web-devicons",
+		},
+	}, -- lazy.nvim
+	{ "MunifTanjim/nui.nvim" },
+	{ "rcarriga/nvim-notify" },
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
 		},
 	},
 	{
