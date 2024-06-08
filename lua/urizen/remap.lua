@@ -35,10 +35,4 @@ vim.keymap.set("n", "gR", function()
 	require("trouble").toggle("lsp_references")
 end)
 vim.keymap.set("n", "vs", "<cmd> :vs <cr>")
-vim.keymap.set("n", "cl", "<cmd>call InsertConsoleLog()<CR>", { noremap = true })
-
-function InsertConsoleLog()
-	local line = vim.api.nvim_get_current_line()
-	local new_line = string.format("console.log('%s');", line)
-	vim.api.nvim_set_current_line(new_line)
-end
+vim.keymap.set("n", "nd", ":NoiceDismiss<CR>")
