@@ -275,9 +275,6 @@ require("lazy").setup({
 		"tjdevries/nlua.nvim",
 	},
 	{
-		"theprimeagen/harpoon",
-	},
-	{
 		"mbbill/undotree",
 	},
 	-- Here is a more advanced example where we pass configuration
