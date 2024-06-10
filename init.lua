@@ -257,6 +257,7 @@ require("lazy").setup({
 	}, -- lazy.nvim
 	{ "MunifTanjim/nui.nvim" },
 	{ "rcarriga/nvim-notify" },
+	{ "tpope/vim-fugitive" },
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",

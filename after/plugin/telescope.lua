@@ -21,7 +21,7 @@ telescope.setup({
 		entry_prefix = "  ",
 		initial_mode = "insert",
 		selection_strategy = "reset",
-		sorting_strategy = "ascending",
+		sorting_strategy = "descending",
 		layout_strategy = "horizontal",
 		layout_config = {
 			horizontal = {
