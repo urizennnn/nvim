@@ -1,5 +1,6 @@
 require("octo").setup({
 	use_local_fs = false, -- use local files on right side of reviews
+	suppress_missing_scope = { projects_v2 = true },
 	enable_builtin = true, -- shows a list of builtin actions when no action is provided
 	default_remote = { "upstream", "origin" }, -- order to try remotes
 	default_merge_method = "commit", -- default merge method which should be used when calling `Octo pr merge`, could be `commit`, `rebase` or `squash`
@@ -28,7 +29,6 @@ require("octo").setup({
 	gh_cmd = "gh", -- Command to use when calling Github CLI
 	gh_env = {}, -- extra environment variables to pass on to GitHub CLI, can be a table or function returning a table
 	timeout = 5000, -- timeout for requests between the remote server
-	default_to_projects_v2 = false, -- use projects v2 for the `Octo card ...` command by default. Both legacy and v2 commands are available under `Octo cardlegacy ...` and `Octo cardv2 ...` respectively.
 	ui = {
 		use_signcolumn = false, -- show "modified" marks on the sign column
 		use_signstatus = true, -- show "modified" marks on the status column
@@ -64,7 +64,6 @@ require("octo").setup({
 		dark_blue = "#0366d6",
 		purple = "#6f42c1",
 	},
-	mappings_disable_default = false, -- disable default mappings if true, but will still adapt user mappings
 	mappings = {
 		issue = {
 			close_issue = { lhs = "<leader>ic", desc = "close issue" },

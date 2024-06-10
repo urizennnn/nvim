@@ -185,9 +185,6 @@ require("lazy").setup({
 			-- OR 'ibhagwan/fzf-lua',
 			"nvim-tree/nvim-web-devicons",
 		},
-		config = function()
-			require("octo").setup()
-		end,
 	},
 	{
 		"github/copilot.vim",
