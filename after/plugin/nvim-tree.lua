@@ -14,7 +14,7 @@ require("nvim-tree").setup({
 		centralize_selection = false,
 		cursorline = true,
 		debounce_delay = 15,
-		side = "right",
+		side = "left",
 		preserve_window_proportions = false,
 		number = false,
 		relativenumber = false,
