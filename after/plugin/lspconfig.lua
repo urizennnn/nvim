@@ -36,3 +36,8 @@ require("lspconfig").clangd.setup({
 })
 require("lspconfig").golangci_lint_ls.setup({})
 require("lspconfig").rust_analyzer.setup({})
+require("lspconfig").slint_lsp.setup({
+	cmd = { "slint-lsp" },
+	filetypes = { "slim" },
+	root_dir = require("lspconfig.util").root_pattern(".slintrc.json"),
+})

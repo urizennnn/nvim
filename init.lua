@@ -280,6 +280,7 @@ require("lazy").setup({
 	--	{
 	--	"jose-elias-alvarez/null-ls.nvim",
 	--	},
+	{ "slint-ui/vim-slint" },
 	{
 		"tjdevries/nlua.nvim",
 	},
