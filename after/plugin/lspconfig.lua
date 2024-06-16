@@ -35,9 +35,10 @@ require("lspconfig").clangd.setup({
 	single_file_support = true,
 })
 require("lspconfig").golangci_lint_ls.setup({})
-require("lspconfig").rust_analyzer.setup({})
 require("lspconfig").slint_lsp.setup({
 	cmd = { "slint-lsp" },
 	filetypes = { "slim" },
 	root_dir = require("lspconfig.util").root_pattern(".slintrc.json"),
+	single_file = true,
+	single_file_support = true,
 })

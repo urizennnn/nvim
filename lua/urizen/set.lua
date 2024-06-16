@@ -1,4 +1,3 @@
---:w
 vim.opt.cursorline = false
 vim.opt.relativenumber = true
 vim.opt.autoindent = true
