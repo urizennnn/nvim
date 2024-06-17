@@ -376,12 +376,11 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 			vim.keymap.set("n", "<Enter>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
-			vim.keymap.set(
-				"n",
-				"<leader>f",
-				[[:lua require('telescope.builtin').find_files({ find_command = {'rg', '--ignore', '--hidden', '--files', '--glob', '!**/.git/*'} })<CR>]],
-				{ noremap = true, silent = true }
-			)
+			vim.keymap.set("n", "<leader>f", function()
+				require("telescope.builtin").find_files({
+					find_command = { "rg", "--ignore", "--hidden", "--files", "--glob", "!**/.git/*", "--no-ignore" },
+				})
+			end, { noremap = true, silent = true })
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
 				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
