@@ -178,6 +178,12 @@ require("lazy").setup({
 	-- "gc" to comment visual regions/lines
 	{ "numToStr/Comment.nvim", opts = {} },
 	{
+		"barrett-ruth/live-server.nvim",
+		build = "pnpm add -g live-server",
+		cmd = { "LiveServerStart", "LiveServerStop" },
+		config = true,
+	},
+	{
 		"pwntester/octo.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
@@ -186,6 +192,7 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 	},
+	{ "f-person/git-blame.nvim" },
 	{
 		"github/copilot.vim",
 	},

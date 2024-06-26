@@ -1,3 +1,6 @@
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = { "lua_ls" },
@@ -32,6 +35,20 @@ require("lspconfig").clangd.setup({
 		"configure.ac"
 	),
 	single_file = true,
+	single_file_support = true,
+})
+require("lspconfig").html.setup({
+	capabilities = capabilities,
+	cmd = { "vscode-html-language-server", "--stdio" },
+	filetypes = { "html" },
+	init_options = {
+		configurationSection = { "html", "css", "javascript" },
+		embeddedLanguages = {
+			css = true,
+			javascript = true,
+		},
+		provideFormatter = true,
+	},
 	single_file_support = true,
 })
 require("lspconfig").golangci_lint_ls.setup({})
