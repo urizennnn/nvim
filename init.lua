@@ -1,6 +1,7 @@
 require("urizen")
-vim.g.loaded_netrw = 1
+
 vim.g.loaded_netrwPlugin = 1
+
 -- optionally enable 24-bit colour
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -11,7 +12,14 @@ vim.g.have_nerd_font = true
 
 vim.opt.number = true
 vim.opt.showmode = true
-
+local macro_group = vim.api.nvim_create_augroup("MacroRecording", { clear = true })
+vim.api.nvim_create_autocmd("RecordingLeave", {
+	group = macro_group,
+	callback = function()
+		-- Display a message when macro recording stops
+		print("Macro recording stopped")
+	end,
+})
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
@@ -309,7 +317,6 @@ require("lazy").setup({
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },
 			},
-			yadm = { enable = false },
 		},
 	},
 
@@ -861,26 +868,10 @@ require("lazy").setup({
 			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 		end,
 	},
-
-	-- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
-	-- init.lua. If you want these files, they are in the repository, so you can just download them and
-	-- place them in the correct locations.
-
-	-- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
 	--
-	--  Here are some example plugins that I've included in the Kickstart repository.
-	--  Uncomment any of the lines below to enable them (you will need to restart nvim).
-	--
-	-- require 'kickstart.plugins.debug',
-	-- require 'kickstart.plugins.indent_line',
-	-- require 'kickstart.plugins.lint',
-
-	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-	--    This is the easiest way to modularize your config.
-	--
-	--  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-	--    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-	-- { import = "urizen.packer" },
+	-- require("kickstart.plugins.debug"),
+	-- require("kickstart.plugins.indent_line"),
+	-- require("kickstart.plugins.lint"),
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
