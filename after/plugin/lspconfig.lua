@@ -34,7 +34,6 @@ require("lspconfig").clangd.setup({
 		".clang-format",
 		"configure.ac"
 	),
-	single_file = true,
 	single_file_support = true,
 })
 require("lspconfig").html.setup({

@@ -1,4 +1,5 @@
 vim.opt.cursorline = false
+vim.lsp.inlay_hint.enable(true)
 vim.opt.relativenumber = true
 vim.opt.autoindent = true
 vim.opt.tabstop = 4
