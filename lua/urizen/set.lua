@@ -1,4 +1,5 @@
 vim.opt.cursorline = false
+-- vim.diagnostic.config({ virtual_text = false })
 vim.lsp.inlay_hint.enable(true)
 vim.opt.relativenumber = true
 vim.opt.autoindent = true

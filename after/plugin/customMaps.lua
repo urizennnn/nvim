@@ -6,6 +6,7 @@ function InsertTryCatch()
 		"    " .. line,
 		"} catch (error) {",
 		"    console.error(error);",
+		"	 return res.status().json({});",
 		"}",
 	}
 	local current_line_number = cursor_pos[1] - 1

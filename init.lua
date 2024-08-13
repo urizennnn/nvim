@@ -1,4 +1,5 @@
 require("urizen")
+vim.lsp.set_log_level("debug")
 
 vim.g.loaded_netrwPlugin = 1
 
@@ -25,14 +26,13 @@ vim.opt.breakindent = true
 
 vim.opt.undofile = true
 
+vim.opt.timeoutlen = 300
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 250
-
-vim.opt.timeoutlen = 300
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -135,8 +135,32 @@ require("lazy").setup({
 	-- 		{ "<c-\\>", "<cmd><C-Space>TmuxNavigatePrevious<cr>" },
 	-- 	},
 	-- },
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("tiny-inline-diagnostic").setup()
+		end,
+	},
 	{ "rcarriga/nvim-notify" },
+	{
+		"dstein64/vim-startuptime",
+	},
+	{
+		"NachoNievaG/atac.nvim",
+		dependencies = { "akinsho/toggleterm.nvim" },
+		config = function()
+			require("atac").setup({
+				dir = vim.fn.getcwd(), -- Set dir to the current working directory
+			})
+		end,
+	},
 
+	{
+		"NStefan002/screenkey.nvim",
+		lazy = false,
+		version = "*", -- or branch = "dev", to use the latest commit
+	},
 	-- {
 	-- 	"epwalsh/obsidian.nvim",
 	-- 	version = "*", -- recommended, use latest release instead of latest commit
@@ -174,6 +198,11 @@ require("lazy").setup({
 	-- },
 	-- { "rmagatti/auto-session", config = true },
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
 	-- "gc" to comment visual regions/lines
 	{ "numToStr/Comment.nvim", opts = {} },
 	{
@@ -260,7 +289,7 @@ require("lazy").setup({
 	},
 	{
 		"nvimdev/dashboard-nvim",
-		event = "VimEnter",
+		event = "vimEnter",
 		requires = {
 			"nvim-tree/nvim-web-devicons",
 		},
@@ -318,7 +347,7 @@ require("lazy").setup({
 
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
-		event = "VimEnter",
+		event = "vimEnter",
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -541,6 +570,7 @@ require("lazy").setup({
 				pyright = {},
 				tsserver = {},
 				golangci_lint_ls = {},
+				kotlin_language_server = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:
@@ -763,7 +793,7 @@ require("lazy").setup({
 	-- Highlight todo, notes, etc in comments
 	{
 		"folke/todo-comments.nvim",
-		event = "VimEnter",
+		event = "vimEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false },
 	},
@@ -821,6 +851,7 @@ require("lazy").setup({
 				"javascript",
 				"typescript",
 				"cpp",
+				"kotlin",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,

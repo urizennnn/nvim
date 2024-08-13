@@ -10,6 +10,7 @@ require("mason-lspconfig").setup_handlers({
 })
 require("lspconfig").lua_ls.setup({})
 require("lspconfig").tsserver.setup({})
+
 require("lspconfig").clangd.setup({
 	cmd = {
 		"clangd",
