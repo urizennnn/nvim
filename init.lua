@@ -8,6 +8,19 @@ vim.g.loaded_netrwPlugin = 1
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+vim.g.clipboard = {
+	name = "wl-clipboard",
+	copy = {
+		["+"] = "wl-copy",
+		["*"] = "wl-copy",
+	},
+	paste = {
+		["+"] = "wl-paste --no-newline",
+		["*"] = "wl-paste --no-newline",
+	},
+	cache_enabled = 0,
+}
 vim.opt.clipboard = "unnamedplus"
 vim.g.have_nerd_font = true
 
