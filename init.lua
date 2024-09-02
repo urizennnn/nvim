@@ -3,6 +3,16 @@ vim.lsp.set_log_level("debug")
 
 vim.g.loaded_netrwPlugin = 1
 
+vim.diagnostic.config({
+	virtual_text = {
+		prefix = "●", -- Could be '■', '▎', 'x'
+		spacing = 4,
+	},
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = false,
+})
 -- optionally enable 24-bit colour
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -168,7 +178,24 @@ require("lazy").setup({
 			})
 		end,
 	},
-
+	{ "kristijanhusak/vim-dadbod-completion" },
+	{
+		"kristijanhusak/vim-dadbod-ui",
+		dependencies = {
+			{ "tpope/vim-dadbod", lazy = true },
+			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql", "mongodb" } }, -- Optional
+		},
+		cmd = {
+			"DBUI",
+			"DBUIToggle",
+			"DBUIAddConnection",
+			"DBUIFindBuffer",
+		},
+		init = function()
+			-- Your DBUI configuration
+			vim.g.db_ui_use_nerd_fonts = 1
+		end,
+	},
 	{
 		"NStefan002/screenkey.nvim",
 		lazy = false,
@@ -260,6 +287,9 @@ require("lazy").setup({
 	},
 	{
 		"MunifTanjim/eslint.nvim",
+	},
+	{
+		"tpope/vim-dadbod",
 	},
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 	{

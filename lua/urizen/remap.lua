@@ -42,10 +42,12 @@ keymap("v", "ee", "$")
 keymap("v", "K", ":move '<-2<CR>gv=gv", { silent = true })
 keymap("v", "J", ":move '>+1<CR>gv=gv", { silent = true })
 keymap("n", "<leader>;", "<cmd> :norm A; <CR>")
-keymap("n", "<leader>l", function()
-	vim.cmd("vsplit")
-	vim.lsp.buf.declaration()
-end, { silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>l",
+	":vsplit<CR> | lua vim.lsp.buf.declaration()<CR>",
+	{ noremap = true, silent = true }
+)
 keymap("n", "<leader>c", "<cmd> Copilot disable<CR>")
 keymap("n", "<leader>C", "<cmd> Copilot enable<CR>")
 keymap("n", "<A-Up>", "<cmd> resize +2<CR>")
@@ -83,6 +85,8 @@ keymap("n", "<leader>t", ":TodoTelescope<CR>", { silent = true })
 keymap("n", "run", "<cmd:Rest run<CR>")
 keymap("n", "last", "<cmd:Rest last<CR>")
 keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { silent = true, buffer = bufnr })
-keymap("n", "ft", function()
-	require("telescope").extensions.flutter.commands()
-end)
+keymap("n", "db", "<cmd>DBUIToggle<CR>")
+keymap("n", "dbs", "<cmd>DBUIAddConnection<CR>")
+keymap("n", "tt", "<cmd>tabnew<CR>")
+keymap("n", "tq", "<cmd>tabclose<CR>")
+keymap("n", "tn", "<cmd>tabnext<CR>")

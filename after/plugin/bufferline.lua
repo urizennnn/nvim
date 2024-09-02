@@ -2,6 +2,10 @@ local bufferline = require("bufferline")
 bufferline.setup({
 	options = {
 		mode = "tabs",
+		indicator = {
+			icon = "▎", -- this should be omitted if indicator style is not 'icon'
+			style = "icon",
+		},
 		style_preset = bufferline.style_preset.default,
 		numbers = "ordinal",
 		buffer_close_icon = "󰅖",

@@ -1,5 +1,4 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require("mason").setup()
 require("mason-lspconfig").setup({
@@ -55,3 +54,20 @@ require("lspconfig").html.setup({
 	single_file_support = true,
 })
 require("lspconfig").golangci_lint_ls.setup({})
+require("lspconfig").gopls.setup({
+	capabilities = capabilities,
+	cmd = { "gopls" }, -- Remove "serve" for now
+	filetypes = { "go", "gomod" }, -- Add "gomod" if working with Go modules
+	root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
+	single_file_support = true,
+	settings = {
+		gopls = {
+			analyses = {
+				unusedparams = true,
+			},
+			staticcheck = true,
+			usePlaceholders = true,
+			completeUnimported = true,
+		},
+	},
+})
