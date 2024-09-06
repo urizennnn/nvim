@@ -170,6 +170,16 @@ require("lazy").setup({
 		"dstein64/vim-startuptime",
 	},
 	{
+		"kylechui/nvim-surround",
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	},
+	{
 		"NachoNievaG/atac.nvim",
 		dependencies = { "akinsho/toggleterm.nvim" },
 		config = function()
@@ -238,6 +248,12 @@ require("lazy").setup({
 	-- },
 	-- { "rmagatti/auto-session", config = true },
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	{ "mistricky/codesnap.nvim", build = "make" },
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		opts = {},
+		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
+	},
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
@@ -704,7 +720,7 @@ require("lazy").setup({
 				--
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.
-				-- javascript = { { "prettierd", "prettier" } },
+				javascript = { { "prettierd", "prettier" } },
 			},
 		},
 	},
