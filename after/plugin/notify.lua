@@ -4,6 +4,16 @@ notify("Welcome back Urizen")
 
 vim.notify = notify
 notify.setup({
+	-- Animation style (see below for details)
+	animation_style = "ease",
+	max_width = 80,
+	max_height = 15,
+	on_open = function()
+		vim.cmd("mode")
+	end,
+	on_close = function()
+		vim.cmd("mode")
+	end,
 	background_colour = "NotifyBackground",
 	fps = 30,
 	icons = {
