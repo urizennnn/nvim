@@ -1,3 +1,4 @@
+local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 vim.g.mapleader = " "
 keymap("n", "<leader>x", "<cmd> :bdelete <cr>")
@@ -42,12 +43,6 @@ keymap("v", "ee", "$")
 keymap("v", "K", ":move '<-2<CR>gv=gv", { silent = true })
 keymap("v", "J", ":move '>+1<CR>gv=gv", { silent = true })
 keymap("n", "<leader>;", "<cmd> :norm A; <CR>")
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>l",
-	":vsplit<CR> | lua vim.lsp.buf.declaration()<CR>",
-	{ noremap = true, silent = true }
-)
 keymap("n", "<leader>c", "<cmd> Copilot disable<CR>")
 keymap("n", "<leader>C", "<cmd> Copilot enable<CR>")
 keymap("n", "<A-Up>", "<cmd> resize +2<CR>")
@@ -71,9 +66,6 @@ end)
 keymap("n", "<leader>h", function()
 	vim.cmd.RustLsp({ "hover", "actions" })
 end)
-keymap("n", "cargo", function()
-	vim.cmd.RustLsp("openCargo")
-end)
 keymap("n", "graph", "<cmd>:RustLsp crateGraph {backend {output}}<CR>")
 keymap("n", "join", function()
 	vim.cmd.RustLsp("joinLines")
@@ -92,3 +84,7 @@ keymap("n", "tq", "<cmd>tabclose<CR>")
 keymap("n", "tn", "<cmd>tabnext<CR>")
 keymap("n", "md", "<cmd>RenderMarkdown toggle<CR>")
 keymap("v", "take", "<cmd>CodeSnap<CR>")
+keymap("i", "<C-h>", "<Left>", opts)
+keymap("i", "<C-j>", "<Down>", opts)
+keymap("i", "<C-k>", "<Up>", opts)
+keymap("i", "<A-l>", "<Right>", opts)
