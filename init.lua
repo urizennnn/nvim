@@ -627,7 +627,7 @@ require("lazy").setup({
 				clangd = {},
 				gopls = {},
 				pyright = {},
-				tsserver = {},
+				ts_ls = {},
 				golangci_lint_ls = {},
 				kotlin_language_server = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
