@@ -1,5 +1,7 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
+local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- capabilities.textDocument.formatting = true
+-- vim.print(capabilities.textDocument.formatting)
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = { "lua_ls" },
@@ -9,6 +11,28 @@ require("mason-lspconfig").setup_handlers({
 })
 require("lspconfig").lua_ls.setup({})
 require("lspconfig").ts_ls.setup({})
+require("lspconfig").pyright.setup({
+	-- capabilities = capabilities,
+	cmd = { "pyright-langserver", "--stdio" },
+	filetypes = { "python" },
+	root_dir = require("lspconfig.util").root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt"),
+	single_file_support = true,
+	on_attach = function(client, bufnr)
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_clear_autocmds({
+				group = augroup,
+				buffer = bufnr,
+			})
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = augroup,
+				buffer = bufnr,
+				callback = function()
+					vim.lsp.buf.format({ bufnr = bufnr })
+				end,
+			})
+		end
+	end,
+})
 
 require("lspconfig").clangd.setup({
 	cmd = {
@@ -40,7 +64,7 @@ require("lspconfig").clangd.setup({
 	single_file_support = true,
 })
 require("lspconfig").html.setup({
-	capabilities = capabilities,
+	-- capabilities = capabilities,
 	cmd = { "vscode-html-language-server", "--stdio" },
 	filetypes = { "html" },
 	init_options = {
@@ -53,9 +77,9 @@ require("lspconfig").html.setup({
 	},
 	single_file_support = true,
 })
-require("lspconfig").golangci_lint_ls.setup({})
+-- require("lspconfig").golangci_lint_ls.setup({})
 require("lspconfig").gopls.setup({
-	capabilities = capabilities,
+	-- capabilities = capabilities,
 	cmd = { "gopls" }, -- Remove "serve" for now
 	filetypes = { "go", "gomod" }, -- Add "gomod" if working with Go modules
 	root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),

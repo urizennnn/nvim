@@ -268,6 +268,28 @@ require("lazy").setup({
 		config = true,
 	},
 	{
+		"R-nvim/R.nvim",
+		lazy = false,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "markdown", "markdown_inline", "r", "rnoweb", "yaml" },
+				highlight = { enable = true },
+			})
+		end,
+	},
+	"R-nvim/cmp-r",
+	{
+		"hrsh7th/nvim-cmp",
+		config = function()
+			require("cmp").setup({ sources = { { name = "cmp_r" } } })
+			require("cmp_r").setup({})
+		end,
+	},
+	{
 		"pwntester/octo.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
@@ -628,8 +650,7 @@ require("lazy").setup({
 				gopls = {},
 				pyright = {},
 				ts_ls = {},
-				golangci_lint_ls = {},
-				kotlin_language_server = {},
+				-- golangci_lint_ls = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:
