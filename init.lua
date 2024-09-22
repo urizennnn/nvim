@@ -180,6 +180,9 @@ require("lazy").setup({
 		end,
 	},
 	{
+		"mg979/vim-visual-multi",
+	},
+	{
 		"NachoNievaG/atac.nvim",
 		dependencies = { "akinsho/toggleterm.nvim" },
 		config = function()
