@@ -18,6 +18,7 @@ vim.diagnostic.config({
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.o.updatetime = 100
 
 vim.g.clipboard = {
 	name = "wl-clipboard",
@@ -42,6 +43,24 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 	callback = function()
 		-- Display a message when macro recording stops
 		print("Macro recording stopped")
+	end,
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+	pattern = "*",
+	callback = function()
+		vim.diagnostic.open_float(nil, {
+			focus = false,
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			border_highlight = "#FFD700",
+			float_win_highlight = "#1e1e1e",
+			severity = { min = vim.diagnostic.severity.WARN },
+			format = function(diagnostic)
+				local lsp_name = diagnostic.source and string.format("LSP: %s", diagnostic.source) or "LSP: Unknown"
+				local error_message = string.format("%s [%s]", diagnostic.message, diagnostic.code or "N/A")
+				return string.format("%s\n%s", lsp_name, error_message)
+			end,
+		})
 	end,
 })
 
@@ -158,13 +177,13 @@ require("lazy").setup({
 	-- 		{ "<c-\\>", "<cmd><C-Space>TmuxNavigatePrevious<cr>" },
 	-- 	},
 	-- },
-	{
-		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("tiny-inline-diagnostic").setup()
-		end,
-	},
+	-- {
+	-- 	"rachartier/tiny-inline-diagnostic.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("tiny-inline-diagnostic").setup()
+	-- 	end,
+	-- },
 	{ "rcarriga/nvim-notify" },
 	{
 		"dstein64/vim-startuptime",
@@ -279,6 +298,9 @@ require("lazy").setup({
 		run = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
+				ignore_install = { "haskell" },
+				auto_install = true,
+				sync_install = true,
 				ensure_installed = { "markdown", "markdown_inline", "r", "rnoweb", "yaml" },
 				highlight = { enable = true },
 			})

@@ -1,7 +1,7 @@
 local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
--- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
--- capabilities.textDocument.formatting = true
--- vim.print(capabilities.textDocument.formatting)
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.textDocument.formatting = true
+vim.print(capabilities.textDocument.formatting)
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = { "lua_ls" },
@@ -12,7 +12,7 @@ require("mason-lspconfig").setup_handlers({
 require("lspconfig").lua_ls.setup({})
 require("lspconfig").ts_ls.setup({})
 require("lspconfig").pyright.setup({
-	-- capabilities = capabilities,
+	capabilities = capabilities,
 	cmd = { "pyright-langserver", "--stdio" },
 	filetypes = { "python" },
 	root_dir = require("lspconfig.util").root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt"),
@@ -64,7 +64,7 @@ require("lspconfig").clangd.setup({
 	single_file_support = true,
 })
 require("lspconfig").html.setup({
-	-- capabilities = capabilities,
+	capabilities = capabilities,
 	cmd = { "vscode-html-language-server", "--stdio" },
 	filetypes = { "html" },
 	init_options = {
@@ -79,7 +79,7 @@ require("lspconfig").html.setup({
 })
 -- require("lspconfig").golangci_lint_ls.setup({})
 require("lspconfig").gopls.setup({
-	-- capabilities = capabilities,
+	capabilities = capabilities,
 	cmd = { "gopls" }, -- Remove "serve" for now
 	filetypes = { "go", "gomod" }, -- Add "gomod" if working with Go modules
 	root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
