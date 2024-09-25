@@ -18,7 +18,7 @@ vim.diagnostic.config({
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.o.updatetime = 100
+vim.o.updatetime = 1
 
 vim.g.clipboard = {
 	name = "wl-clipboard",
@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
 			border_highlight = "#FFD700",
 			float_win_highlight = "#1e1e1e",
-			severity = { min = vim.diagnostic.severity.WARN },
+			-- severity = { min = vim.diagnostic.severity.WARN },
 			format = function(diagnostic)
 				local lsp_name = diagnostic.source and string.format("LSP: %s", diagnostic.source) or "LSP: Unknown"
 				local error_message = string.format("%s [%s]", diagnostic.message, diagnostic.code or "N/A")
