@@ -17,6 +17,21 @@ require("lspconfig").pyright.setup({
 	filetypes = { "python" },
 	root_dir = require("lspconfig.util").root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt"),
 	single_file_support = true,
+	settings = {
+		python = {
+			pythonPath = (function()
+				local cwd = vim.fn.getcwd()
+
+				local venv_python = cwd .. "/myenv/bin/python"
+
+				if vim.fn.filereadable(venv_python) == 1 then
+					return venv_python
+				else
+					return "/usr/bin/python"
+				end
+			end)(),
+		},
+	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
 			vim.api.nvim_clear_autocmds({
@@ -79,7 +94,7 @@ require("lspconfig").html.setup({
 })
 -- require("lspconfig").golangci_lint_ls.setup({})
 require("lspconfig").gopls.setup({
-	capabilities = capabilities,
+	-- capabilities = capabilities,
 	cmd = { "gopls" }, -- Remove "serve" for now
 	filetypes = { "go", "gomod" }, -- Add "gomod" if working with Go modules
 	root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
