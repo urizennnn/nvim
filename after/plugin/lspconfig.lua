@@ -19,17 +19,7 @@ require("lspconfig").pyright.setup({
 	single_file_support = true,
 	settings = {
 		python = {
-			pythonPath = (function()
-				local cwd = vim.fn.getcwd()
-
-				local venv_python = cwd .. "/myenv/bin/python"
-
-				if vim.fn.filereadable(venv_python) == 1 then
-					return venv_python
-				else
-					return "/usr/bin/python"
-				end
-			end)(),
+			pythonPath = vim.fn.exepath("python"),
 		},
 	},
 	on_attach = function(client, bufnr)
