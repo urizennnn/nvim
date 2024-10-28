@@ -88,3 +88,18 @@ keymap("i", "<C-h>", "<Left>", opts)
 keymap("i", "<C-j>", "<Down>", opts)
 keymap("i", "<C-k>", "<Up>", opts)
 keymap("i", "<A-l>", "<Right>", opts)
+local function show_diagnostics()
+  vim.diagnostic.open_float(nil, {
+    focus = false,
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    format = function(diagnostic)
+      local lsp_name = diagnostic.source and string.format("LSP: %s", diagnostic.source) or "LSP: Unknown"
+      local error_message = string.format("%s [%s]", diagnostic.message, diagnostic.code or "N/A")
+      return string.format("%s\n%s", lsp_name, error_message)
+    end,
+  })
+end
+
+keymap("n", "<leader><Enter>", show_diagnostics, opts)
+keymap("n","md","<cmd>MarkdownPreviewToggle<CR>",opts)
+

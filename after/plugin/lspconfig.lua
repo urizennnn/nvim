@@ -10,6 +10,7 @@ require("mason-lspconfig").setup_handlers({
 	["rust_analyzer"] = function() end,
 })
 require("lspconfig").lua_ls.setup({})
+require("lspconfig").black.setup({})
 require("lspconfig").ts_ls.setup({})
 require("lspconfig").pyright.setup({
 	capabilities = capabilities,
@@ -29,10 +30,9 @@ require("lspconfig").pyright.setup({
 				buffer = bufnr,
 			})
 			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = augroup,
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ bufnr = bufnr })
+				pattern = "*",
+				callback = function(args)
+					require("conform").format({ bufnr = args.buf })
 				end,
 			})
 		end

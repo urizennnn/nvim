@@ -1,6 +1,11 @@
 require("urizen")
 vim.lsp.set_log_level("debug")
 
+vim.g.mkdp_port = 2000
+vim.g.mkdp_echo_preview_url = 1
+vim.g.mkdp_page_title = "「${name}」"
+vim.g.mkdp_filetypes = { "markdown" }
+vim.g.mkdp_theme = "dark"
 vim.g.loaded_netrwPlugin = 1
 
 vim.diagnostic.config({
@@ -34,7 +39,8 @@ vim.g.clipboard = {
 }
 vim.opt.clipboard = "unnamedplus"
 vim.g.have_nerd_font = true
-
+vim.opt.scrollback = 100000
+vim.opt.lazyredraw = true
 vim.opt.number = true
 vim.opt.showmode = true
 local macro_group = vim.api.nvim_create_augroup("MacroRecording", { clear = true })
@@ -46,23 +52,7 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("CursorHold", {
-	pattern = "*",
-	callback = function()
-		vim.diagnostic.open_float(nil, {
-			focus = false,
-			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-			border_highlight = "#FFD700",
-			float_win_highlight = "#1e1e1e",
-			-- severity = { min = vim.diagnostic.severity.WARN },
-			format = function(diagnostic)
-				local lsp_name = diagnostic.source and string.format("LSP: %s", diagnostic.source) or "LSP: Unknown"
-				local error_message = string.format("%s [%s]", diagnostic.message, diagnostic.code or "N/A")
-				return string.format("%s\n%s", lsp_name, error_message)
-			end,
-		})
-	end,
-})
+
 
 vim.opt.breakindent = true
 
@@ -202,6 +192,15 @@ require("lazy").setup({
 		"mg979/vim-visual-multi",
 	},
 	{
+		"Wansmer/treesj",
+		keys = { "<space>m", "<space>j", "<space>s" },
+		dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
+		config = function()
+			require("treesj").setup({--[[ your config ]]
+			})
+		end,
+	},
+	{
 		"NachoNievaG/atac.nvim",
 		dependencies = { "akinsho/toggleterm.nvim" },
 		config = function()
@@ -229,10 +228,22 @@ require("lazy").setup({
 		end,
 	},
 	{
+  "iamcco/markdown-preview.nvim",
+  cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  build = "cd app && yarn install",
+  init = function()
+    vim.g.mkdp_filetypes = { "markdown" }
+  end,
+  ft = { "markdown" },
+},{
 		"NStefan002/screenkey.nvim",
 		lazy = false,
 		version = "*", -- or branch = "dev", to use the latest commit
 	},
+{
+  "stevearc/conform.nvim",
+  opts = {},
+},
 	-- {
 	-- 	"epwalsh/obsidian.nvim",
 	-- 	version = "*", -- recommended, use latest release instead of latest commit
