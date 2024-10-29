@@ -9,8 +9,16 @@ require("mason-lspconfig").setup({
 require("mason-lspconfig").setup_handlers({
 	["rust_analyzer"] = function() end,
 })
-require("lspconfig").lua_ls.setup({})
-require("lspconfig").black.setup({})
+
+require('lspconfig').lua_ls.setup {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }  -- Add 'vim' as a recognized global
+            }
+        }
+    }
+}
 require("lspconfig").ts_ls.setup({})
 require("lspconfig").pyright.setup({
 	capabilities = capabilities,

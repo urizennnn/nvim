@@ -1,6 +1,7 @@
 require("urizen")
 vim.lsp.set_log_level("debug")
 
+vim.g.lazydev_enabled=true
 vim.g.mkdp_port = 2000
 vim.g.mkdp_echo_preview_url = 1
 vim.g.mkdp_page_title = "「${name}」"
@@ -174,10 +175,44 @@ require("lazy").setup({
 	-- 		require("tiny-inline-diagnostic").setup()
 	-- 	end,
 	-- },
+-- {
+--   "folke/lazydev.nvim",
+--   ft = "lua", -- only load on lua files
+--   opts = {
+--     library = {
+--       "lazy.nvim",
+--       "luvit-meta/library",
+--       { path = "luvit-meta/library", words = { "vim%.uv" } },
+--       "LazyVim",
+--       { path = "LazyVim", words = { "LazyVim" } },
+--     },
+--     -- always enable unless `vim.g.lazydev_enabled = false`
+--     -- This is the default
+--
+--     -- disable when a .luarc.json file is found
+--     enabled = function(root_dir)
+--       return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+--     end,
+--   },
+-- },
+  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+  
+{ -- optional completion source for require statements and module annotations
+  "hrsh7th/nvim-cmp",
+  event = { "InsertEnter", "CmdlineEnter" },
+  dependencies = {
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-nvim-lua",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/cmp-emoji",
+    "Saecki/crates.nvim",
+    "L3MON4D3/LuaSnip",
+  },
+}
+,
 	{ "rcarriga/nvim-notify" },
-	{
-		"dstein64/vim-startuptime",
-	},
 	{
 		"kylechui/nvim-surround",
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -318,13 +353,7 @@ require("lazy").setup({
 		end,
 	},
 	"R-nvim/cmp-r",
-	{
-		"hrsh7th/nvim-cmp",
-		config = function()
-			require("cmp").setup({ sources = { { name = "cmp_r" } } })
-			require("cmp_r").setup({})
-		end,
-	},
+	
 	{
 		"pwntester/octo.nvim",
 		requires = {
@@ -567,7 +596,7 @@ require("lazy").setup({
 
 			-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
 			-- used for completion, annotations and signatures of Neovim apis
-			{ "folke/neodev.nvim", opts = {} },
+			-- { "folke/neodev.nvim", opts = {} },
 		},
 		config = function()
 			-- Brief aside: **What is LSP?**
