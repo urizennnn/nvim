@@ -175,6 +175,7 @@ require("lazy").setup({
 	-- 		require("tiny-inline-diagnostic").setup()
 	-- 	end,
 	-- },
+
 -- {
 --   "folke/lazydev.nvim",
 --   ft = "lua", -- only load on lua files
@@ -185,17 +186,17 @@ require("lazy").setup({
 --       { path = "luvit-meta/library", words = { "vim%.uv" } },
 --       "LazyVim",
 --       { path = "LazyVim", words = { "LazyVim" } },
+--       { path = "vim", words = { "vim" } } -- Add 'vim' as a global library
 --     },
---     -- always enable unless `vim.g.lazydev_enabled = false`
---     -- This is the default
---
---     -- disable when a .luarc.json file is found
 --     enabled = function(root_dir)
 --       return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
 --     end,
 --   },
--- },
-  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+-- }
+-- ,
+--   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+  
+
   
 { -- optional completion source for require statements and module annotations
   "hrsh7th/nvim-cmp",

@@ -10,15 +10,30 @@ require("mason-lspconfig").setup_handlers({
 	["rust_analyzer"] = function() end,
 })
 
-require('lspconfig').lua_ls.setup {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }  -- Add 'vim' as a recognized global
-            }
-        }
-    }
-}
+
+require("lspconfig").lua_ls.setup({
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+        path = vim.split(package.path, ";"),
+      },
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = {
+        library = {
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.stdpath("config") .. "/lua"] = true,
+        },
+        maxPreload = 10000,
+        preloadFileSize = 1000,
+      },
+      telemetry = { enable = false },
+    },
+  },
+})
+
 require("lspconfig").ts_ls.setup({})
 require("lspconfig").pyright.setup({
 	capabilities = capabilities,
