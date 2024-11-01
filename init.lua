@@ -583,6 +583,17 @@ require("lazy").setup({
 		end,
 	},
 	--
+  {
+    dir="/home/urizen/rescue-lsp",
+    name="rescue-lsp",
+    -- config = function ()
+    --   require("rescue-lsp").setup()
+    -- end
+  },
+  -- {"urizennnn/rescue-lsp.nvim",
+  -- config = function ()
+  --   require("rescue-lsp").setup()
+  -- end},
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
 		dependencies = {

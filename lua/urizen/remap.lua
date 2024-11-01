@@ -102,4 +102,4 @@ end
 
 keymap("n", "<leader><Enter>", show_diagnostics, opts)
 keymap("n","md","<cmd>MarkdownPreviewToggle<CR>",opts)
-
+keymap("n","<leader><leader>","<cmd>e#<return>",opts)
