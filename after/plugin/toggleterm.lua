@@ -18,15 +18,15 @@ require("toggleterm").setup({
 			background = "Normal",
 		},
 	},
+	winbar = {
+		enabled = false,
+		name_formatter = function(term) --  term: Terminal
+			return term.name
+		end,
+	},
 })
 
 local Terminal = require("toggleterm.terminal").Terminal
-
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-
-function _LAZYGIT_TOGGLE()
-	lazygit:toggle()
-end
 
 local node = Terminal:new({ cmd = "node", hidden = true })
 function _NODE_TOGGLE()
@@ -38,3 +38,6 @@ local htop = Terminal:new({ cmd = "htop", hidden = true })
 function _HTOP_TOGGLE()
 	htop:toggle()
 end
+
+vim.keymap.set("n", "ht", ":lua _HTOP_TOGGLE()<CR>", { silent = true })
+vim.keymap.set("n", "node", ":lua _NODE_TOGGLE()<CR>", { silent = true })

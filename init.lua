@@ -1,7 +1,8 @@
 require("urizen")
+local snacks = require("after.plugin.snacks")
 vim.lsp.set_log_level("debug")
-
-vim.g.lazydev_enabled=true
+vim.g.db_ui_use_nvim_notify = 1
+vim.g.lazydev_enabled = true
 vim.g.mkdp_port = 2000
 vim.g.mkdp_echo_preview_url = 1
 vim.g.mkdp_page_title = "「${name}」"
@@ -52,8 +53,6 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 		print("Macro recording stopped")
 	end,
 })
-
-
 
 vim.opt.breakindent = true
 
@@ -176,43 +175,196 @@ require("lazy").setup({
 	-- 	end,
 	-- },
 
--- {
---   "folke/lazydev.nvim",
---   ft = "lua", -- only load on lua files
---   opts = {
---     library = {
---       "lazy.nvim",
---       "luvit-meta/library",
---       { path = "luvit-meta/library", words = { "vim%.uv" } },
---       "LazyVim",
---       { path = "LazyVim", words = { "LazyVim" } },
---       { path = "vim", words = { "vim" } } -- Add 'vim' as a global library
---     },
---     enabled = function(root_dir)
---       return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
---     end,
---   },
--- }
--- ,
---   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-  
+	-- {
+	--   "folke/lazydev.nvim",
+	--   ft = "lua", -- only load on lua files
+	--   opts = {
+	--     library = {
+	--       "lazy.nvim",
+	--       "luvit-meta/library",
+	--       { path = "luvit-meta/library", words = { "vim%.uv" } },
+	--       "LazyVim",
+	--       { path = "LazyVim", words = { "LazyVim" } },
+	--       { path = "vim", words = { "vim" } } -- Add 'vim' as a global library
+	--     },
+	--     enabled = function(root_dir)
+	--       return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+	--     end,
+	--   },
+	-- }
+	-- ,
+	--   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		---@type snacks.Config
+		opts = {
+			bigfile = { enabled = true },
+			notifier = {
+				enabled = true,
+				timeout = 3000,
+			},
+			quickfile = { enabled = true },
+			statuscolumn = { enabled = true },
+			words = { enabled = true },
+			styles = {
+				notification = {
+					wo = { wrap = true }, -- Wrap notifications
+				},
+			},
+		},
+		keys = {
+			{
+				"<leader>un",
+				function()
+					Snacks.notifier.hide()
+				end,
+				desc = "Dismiss All Notifications",
+			},
+			{
+				"<leader>bd",
+				function()
+					Snacks.bufdelete()
+				end,
+				desc = "Delete Buffer",
+			},
+			{
+				"<leader>gg",
+				function()
+					Snacks.lazygit()
+				end,
+				desc = "Lazygit",
+			},
+			{
+				"<leader>gb",
+				function()
+					Snacks.git.blame_line()
+				end,
+				desc = "Git Blame Line",
+			},
+			{
+				"<leader>gB",
+				function()
+					Snacks.gitbrowse()
+				end,
+				desc = "Git Browse",
+			},
+			{
+				"<leader>gf",
+				function()
+					Snacks.lazygit.log_file()
+				end,
+				desc = "Lazygit Current File History",
+			},
+			{
+				"<leader>gl",
+				function()
+					Snacks.lazygit.log()
+				end,
+				desc = "Lazygit Log (cwd)",
+			},
+			{
+				"<leader>R",
+				function()
+					Snacks.rename()
+				end,
+				desc = "Rename File",
+			},
+			{
+				"<c-/>",
+				function()
+					Snacks.terminal()
+				end,
+				desc = "Toggle Terminal",
+			},
+			{
+				"<c-_>",
+				function()
+					Snacks.terminal()
+				end,
+				desc = "which_key_ignore",
+			},
+			{
+				"]]",
+				function()
+					Snacks.words.jump(vim.v.count1)
+				end,
+				desc = "Next Reference",
+				mode = { "n", "t" },
+			},
+			{
+				"[[",
+				function()
+					Snacks.words.jump(-vim.v.count1)
+				end,
+				desc = "Prev Reference",
+				mode = { "n", "t" },
+			},
+			{
+				"<leader>N",
+				desc = "Neovim News",
+				function()
+					Snacks.win({
+						file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+						width = 0.6,
+						height = 0.6,
+						wo = {
+							spell = false,
+							wrap = false,
+							signcolumn = "yes",
+							statuscolumn = " ",
+							conceallevel = 3,
+						},
+					})
+				end,
+			},
+		},
+		init = function()
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "VeryLazy",
+				callback = function()
+					-- Setup some globals for debugging (lazy-loaded)
+					_G.dd = function(...)
+						Snacks.debug.inspect(...)
+					end
+					_G.bt = function()
+						Snacks.debug.backtrace()
+					end
+					vim.print = _G.dd -- Override print to use snacks for `:=` command
 
-  
-{ -- optional completion source for require statements and module annotations
-  "hrsh7th/nvim-cmp",
-  event = { "InsertEnter", "CmdlineEnter" },
-  dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-nvim-lua",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/cmp-emoji",
-    "Saecki/crates.nvim",
-    "L3MON4D3/LuaSnip",
-  },
-}
-,
+					-- Create some toggle mappings
+					Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+					Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+					Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+					Snacks.toggle.diagnostics():map("<leader>ud")
+					Snacks.toggle.line_number():map("<leader>ul")
+					Snacks.toggle
+						.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+						:map("<leader>uc")
+					Snacks.toggle.treesitter():map("<leader>uT")
+					Snacks.toggle
+						.option("background", { off = "light", on = "dark", name = "Dark Background" })
+						:map("<leader>ub")
+					Snacks.toggle.inlay_hints():map("<leader>uh")
+				end,
+			})
+		end,
+	},
+	{ -- optional completion source for require statements and module annotations
+		"hrsh7th/nvim-cmp",
+		event = { "InsertEnter", "CmdlineEnter" },
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-emoji",
+			"Saecki/crates.nvim",
+			"L3MON4D3/LuaSnip",
+		},
+	},
 	{ "rcarriga/nvim-notify" },
 	{
 		"kylechui/nvim-surround",
@@ -250,7 +402,7 @@ require("lazy").setup({
 		"kristijanhusak/vim-dadbod-ui",
 		dependencies = {
 			{ "tpope/vim-dadbod", lazy = true },
-			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql", "mongodb" } }, -- Optional
+			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "psql", "mongodb" } }, -- Optional
 		},
 		cmd = {
 			"DBUI",
@@ -261,25 +413,33 @@ require("lazy").setup({
 		init = function()
 			-- Your DBUI configuration
 			vim.g.db_ui_use_nerd_fonts = 1
+			vim.g.db_ui_icons = {
+				expanded = "▾",
+				collapsed = "▸",
+				saved_query = "*",
+				new_query = "+",
+				tables = "~",
+				buffers = "»",
+				connection_ok = "✓",
+				connection_error = "✕",
+			}
+			vim.g.db_ui_disable_progress_bar = 1
 		end,
 	},
 	{
-  "iamcco/markdown-preview.nvim",
-  cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-  build = "cd app && yarn install",
-  init = function()
-    vim.g.mkdp_filetypes = { "markdown" }
-  end,
-  ft = { "markdown" },
-},{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		build = "cd app && yarn install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
+	},
+	{
 		"NStefan002/screenkey.nvim",
 		lazy = false,
 		version = "*", -- or branch = "dev", to use the latest commit
 	},
-{
-  "stevearc/conform.nvim",
-  opts = {},
-},
 	-- {
 	-- 	"epwalsh/obsidian.nvim",
 	-- 	version = "*", -- recommended, use latest release instead of latest commit
@@ -354,7 +514,7 @@ require("lazy").setup({
 		end,
 	},
 	"R-nvim/cmp-r",
-	
+
 	{
 		"pwntester/octo.nvim",
 		requires = {
@@ -583,17 +743,19 @@ require("lazy").setup({
 		end,
 	},
 	--
-  {
-    dir="/home/urizen/rescue-lsp",
-    name="rescue-lsp",
-    -- config = function ()
-    --   require("rescue-lsp").setup()
-    -- end
-  },
-  -- {"urizennnn/rescue-lsp.nvim",
-  -- config = function ()
-  --   require("rescue-lsp").setup()
-  -- end},
+	{
+		dir = "/home/urizen/rescue-lsp",
+		name = "rescue-lsp",
+		config = function()
+			require("rescue-lsp").setup()
+		end,
+	},
+	-- {
+	-- 	"urizennnn/rescue-lsp.nvim",
+	-- 	config = function()
+	-- 		require("rescue-lsp").setup()
+	-- 	end,
+	-- },
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -786,6 +948,7 @@ require("lazy").setup({
 			})
 		end,
 	},
+
 	{ -- Autoformat
 		"stevearc/conform.nvim",
 		lazy = false,
@@ -799,22 +962,24 @@ require("lazy").setup({
 				desc = "[F]ormat buffer",
 			},
 		},
+
+		---@type conform.setupOpts
 		opts = {
-			notify_on_error = false,
 			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
 				local disable_filetypes = { c = true, cpp = true }
 				return {
 					timeout_ms = 500,
 					lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
 				}
 			end,
+			format_after_save = {
+				lsp_format = "fallback",
+			},
+			notify_no_formatters = true,
 			formatters_by_ft = {
 				lua = { "stylua" },
 				-- Conform can also run multiple formatters sequentially
-				-- python = { "isort", "black" },
+				python = { "isort", "black" },
 				--
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.

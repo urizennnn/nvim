@@ -9,29 +9,36 @@ require("mason-lspconfig").setup({
 require("mason-lspconfig").setup_handlers({
 	["rust_analyzer"] = function() end,
 })
-
-
+--- autocmd for formatting
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = vim.api.nvim_create_augroup("custom_lsp", { clear = false }),
+	pattern = "*",
+	callback = function(_)
+		require("conform").format({ lsp_fallback = true })
+	end,
+})
 require("lspconfig").lua_ls.setup({
-  settings = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
-        path = vim.split(package.path, ";"),
-      },
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.stdpath("config") .. "/lua"] = true,
-        },
-        maxPreload = 10000,
-        preloadFileSize = 1000,
-      },
-      telemetry = { enable = false },
-    },
-  },
+	settings = {
+		Lua = {
+			runtime = {
+				version = "LuaJIT",
+				path = vim.split(package.path, ";"),
+			},
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.stdpath("config") .. "/lua"] = true,
+					[".local/share/nvim/lazy/conform.nvim/lua/"] = true,
+				},
+				maxPreload = 10000,
+				preloadFileSize = 1000,
+			},
+			telemetry = { enable = false },
+		},
+	},
 })
 
 require("lspconfig").ts_ls.setup({})
