@@ -1,5 +1,5 @@
 require("urizen")
-local snacks = require("after.plugin.snacks")
+local snacks = require("plugin-config.snacks")
 vim.lsp.set_log_level("debug")
 vim.g.db_ui_use_nvim_notify = 1
 vim.g.lazydev_enabled = true
