@@ -1,7 +1,8 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
+vim.g.mapleader = " "
 keymap("n", "<leader>x", "<cmd> :bdelete <cr>")
-keymap("n", "<leader>", vim.cmd.NvimTreeToggle)
+keymap("n", "<leader>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 keymap("n", "<C-d>", "<C-d>zz")
 keymap("v", "J", ":m '>+1<CR>gv=gv")
 keymap("v", "K", ":m '<-2<CR>gv=gv")

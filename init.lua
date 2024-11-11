@@ -829,6 +829,7 @@ require("lazy").setup({
 		"folke/tokyonight.nvim",
 		priority = 1000, -- Make sure to load this before all the other start plugins.
 		init = function()
+			vim.cmd.colorscheme("tokyonight")
 			vim.cmd.hi("Comment gui=none")
 		end,
 		config = function()
@@ -857,14 +858,14 @@ require("lazy").setup({
 
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
-			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+			-- -i saiw) - [S]urround [A]dd [I]nner [W]ord [)]Pareni
 			-- - sd'   - [S]urround [D]elete [']quotes
 			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup()
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,
-			--  and try some other statusline plugin
+			--  and strys some other statusline plugin
 			local statusline = require("mini.statusline")
 			-- set use_icons to true if you have a Nerd Font
 			statusline.setup({ use_icons = vim.g.have_nerd_font })
