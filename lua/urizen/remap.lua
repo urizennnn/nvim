@@ -1,6 +1,5 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
-vim.g.mapleader = " "
 keymap("n", "<leader>x", "<cmd> :bdelete <cr>")
 keymap("n", "<leader>", vim.cmd.NvimTreeToggle)
 keymap("n", "<C-d>", "<C-d>zz")
@@ -54,9 +53,7 @@ keymap("n", "<C-Right>", "<cmd> vertical resize -2<CR>")
 keymap("n", "help", "<cmd> :Telescope help_tags<CR>", { silent = true })
 keymap("n", "live", "<cmd>:LiveServerStart<CR>", { silent = true })
 keymap("n", "stop", "<cmd>:LiveServerStop<CR>", { silent = true })
-keymap("n", "GB", function()
-	Snacks.git.blame_line()
-end, { silent = true, noremap = true })
+keymap("n", "GB", "<cmd>GitBlameToggle<return>", { silent = true, noremap = true })
 keymap("n", "open", "<cmd>:GitBlameOpenCommitURL<CR>", { silent = true, noremap = true })
 local bufnr = vim.api.nvim_get_current_buf()
 keymap("n", "<leader>a", function()

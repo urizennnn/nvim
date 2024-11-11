@@ -151,23 +151,6 @@ require("lazy").setup({
 	--
 	-- Use `opts = {}` to force a plugin to be loaded.
 	-- {
-	-- 	"christoomey/vim-tmux-navigator",
-	-- 	cmd = {
-	-- 		"TmuxNavigateLeft",
-	-- 		"TmuxNavigateDown",
-	-- 		"TmuxNavigateUp",
-	-- 		"TmuxNavigateRight",
-	-- 		"TmuxNavigatePrevious",
-	-- 	},
-	-- 	keys = {
-	-- 		{ "<A-l>", "<cmd><C-Space>TmuxNavigateLeft<cr>" },
-	-- 		{ "<A-d>", "<cmd><C-Space>TmuxNavigateDown<cr>" },
-	-- 		{ "<A-u>", "<cmd><C-Space>TmuxNavigateUp<cr>" },
-	-- 		{ "<A-r>", "<cmd><C-Space>TmuxNavigateRight<cr>" },
-	-- 		{ "<c-\\>", "<cmd><C-Space>TmuxNavigatePrevious<cr>" },
-	-- 	},
-	-- },
-	-- {
 	-- 	"rachartier/tiny-inline-diagnostic.nvim",
 	-- 	event = "VeryLazy",
 	-- 	config = function()
@@ -175,25 +158,6 @@ require("lazy").setup({
 	-- 	end,
 	-- },
 
-	-- {
-	--   "folke/lazydev.nvim",
-	--   ft = "lua", -- only load on lua files
-	--   opts = {
-	--     library = {
-	--       "lazy.nvim",
-	--       "luvit-meta/library",
-	--       { path = "luvit-meta/library", words = { "vim%.uv" } },
-	--       "LazyVim",
-	--       { path = "LazyVim", words = { "LazyVim" } },
-	--       { path = "vim", words = { "vim" } } -- Add 'vim' as a global library
-	--     },
-	--     enabled = function(root_dir)
-	--       return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
-	--     end,
-	--   },
-	-- }
-	-- ,
-	--   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
@@ -321,42 +285,7 @@ require("lazy").setup({
 		lazy = false,
 		version = "*", -- or branch = "dev", to use the latest commit
 	},
-	-- {
-	-- 	"epwalsh/obsidian.nvim",
-	-- 	version = "*", -- recommended, use latest release instead of latest commit
-	-- 	lazy = true,
-	-- 	ft = "markdown",
-	-- 	-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-	-- 	-- event = {
-	-- 	--   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-	-- 	--   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-	-- 	--   "BufReadPre path/to/my-vault/**.md",
-	-- 	--   "BufNewFile path/to/my-vault/**.md",
-	-- 	-- },
-	-- 	dependencies = {
-	-- 		-- Required.
-	-- 		"nvim-lua/plenary.nvim",
-	--
-	-- 		-- see below for full list of optional dependencies 👇
-	-- 	},
-	-- 	opts = {
-	-- 		opts = {
-	-- 			workspaces = {
-	-- 				{
-	-- 					name = "personal",
-	-- 					path = "~/vaults/personal",
-	-- 				},
-	-- 				{
-	-- 					name = "work",
-	-- 					path = "~/vaults/work",
-	-- 				},
-	-- 			},
-	--
-	-- 			-- see below for full list of options 👇
-	-- 		},
-	-- 	},
-	-- },
-	-- { "rmagatti/auto-session", config = true },
+	{ "rmagatti/auto-session", config = true },
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{ "mistricky/codesnap.nvim", build = "make" },
 	{
@@ -511,18 +440,7 @@ require("lazy").setup({
 	--    require('gitsigns').setup({ ... })
 	--
 	-- See `:help gitsigns` to understand what the configuration keys do
-	{
-		"lewis6991/gitsigns.nvim",
-		opts = {
-			signs = {
-				add = { text = "+" },
-				change = { text = "~" },
-				delete = { text = "_" },
-				topdelete = { text = "‾" },
-				changedelete = { text = "~" },
-			},
-		},
-	},
+	{ "lewis6991/gitsigns.nvim" },
 
 	-- NOTE: Plugins can also be configured to run Lua code when they are loaded.
 	--
@@ -648,41 +566,8 @@ require("lazy").setup({
 			-- Useful status updates for LSP.
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", opts = {} },
-
-			-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-			-- used for completion, annotations and signatures of Neovim apis
-			-- { "folke/neodev.nvim", opts = {} },
 		},
 		config = function()
-			-- Brief aside: **What is LSP?**
-			--
-			-- LSP is an initialism you've probably heard, but might not understand what it is.
-			--
-			-- LSP stands for Language Server Protocol. It's a protocol that helps editors
-			-- and language tooling communicate in a standardized fashion.
-			--
-			-- In general, you have a "server" which is some tool built to understand a particular
-			-- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-			-- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-			-- processes that communicate with some "client" - in this case, Neovim!
-			--
-			-- LSP provides Neovim with features like:
-			--  - Go to definition
-			--  - Find references
-			--  - Autocompletion
-			--  - Symbol Search
-			--  - and more!
-			--
-			-- Thus, Language Servers are external tools that must be installed separately from
-			-- Neovim. This is where `mason` and related plugins come into play.
-			--
-			-- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-			-- and elegantly composed help section, `:help lsp-vs-treesitter`
-
-			--  This function gets run when an LSP attaches to a particular buffer.
-			--    That is to say, every time a new file is opened that is associated with
-			--    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-			--    function will be executed to configure the current buffer
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
@@ -749,37 +634,14 @@ require("lazy").setup({
 				end,
 			})
 
-			-- LSP servers and clients are able to communicate to each other what features they support.
-			--  By default, Neovim doesn't support everything that is in the LSP specification.
-			--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-			-- Enable the following language servers
-			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-			--
-			--  Add any additional override configuration in the following tables. Available keys are:
-			--  - cmd (table): Override the default command used to start the server
-			--  - filetypes (table): Override the default list of associated filetypes for the server
-			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-			--  - settings (table): Override the default settings passed when initializing the server.
-			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				clangd = {},
 				gopls = {},
 				pyright = {},
 				ts_ls = {},
-				-- golangci_lint_ls = {},
-				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				--
-				-- Some languages (like typescript) have entire language plugins that can be useful:
-				--    https://github.com/pmizio/typescript-tools.nvim
-				--
-				-- But for many setups, the LSP (`tsserver`) will work just fine
-				-- tsserver = {},
-				--
-
+				golangci_lint_ls = {},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},
@@ -795,17 +657,8 @@ require("lazy").setup({
 					},
 				},
 			}
-
-			-- Ensure the servers and tools above are installed
-			--  To check the current status of installed tools and/or manually install
-			--  other tools, you can run
-			--    :Mason
-			--
-			--  You can press `g?` for help in this menu.
 			require("mason").setup()
 
-			-- You can add other tools here that you want Mason to install
-			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format Lua code
@@ -816,9 +669,6 @@ require("lazy").setup({
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for tsserver)
 						if server_name == "tsserver" then
 							server_name = "ts_ls"
 						end
@@ -903,9 +753,6 @@ require("lazy").setup({
 			},
 			"saadparwaiz1/cmp_luasnip",
 
-			-- Adds other completion capabilities.
-			--  nvim-cmp does not ship with all sources by default. They are split
-			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
 		},
@@ -982,13 +829,6 @@ require("lazy").setup({
 		"folke/tokyonight.nvim",
 		priority = 1000, -- Make sure to load this before all the other start plugins.
 		init = function()
-			-- Load the colorscheme here.
-			-- Like many other themes, this one has different styles, and you could load
-			-- any ot
-			-- her, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-			vim.cmd.colorscheme("tokyonight-night")
-
-			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
 		end,
 		config = function()
@@ -1109,5 +949,3 @@ require("lazy").setup({
 		},
 	},
 })
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
