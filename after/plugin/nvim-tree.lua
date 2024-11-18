@@ -7,19 +7,24 @@ vim.cmd([[
 ]])
 
 require("nvim-tree").setup({
+	update_focused_file = {
+		enable = true, -- Enables the sync with the current file
+		update_cwd = true, -- Updates the current working directory
+		ignore_list = {}, -- Files or folders to ignore for this feature
+	},
 	sort = {
 		sorter = "case_sensitive",
 	},
 	view = {
 		centralize_selection = false,
-		cursorline = false,
+		cursorline = true,
 		debounce_delay = 15,
 		side = "left",
 		preserve_window_proportions = false,
 		number = false,
 		relativenumber = false,
 		signcolumn = "yes",
-		width = 30,
+		adaptive_size = true,
 		float = {
 			enable = true,
 			quit_on_focus_loss = true,

@@ -1,4 +1,6 @@
 vim.opt.cursorline = false
+vim.opt.pumheight = 5
+vim.opt.smartcase = true
 -- vim.diagnostic.config({ virtual_text = false })
 vim.lsp.inlay_hint.enable(true)
 vim.opt.relativenumber = true

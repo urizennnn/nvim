@@ -206,9 +206,15 @@ require("lazy").setup({
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-emoji",
-			"Saecki/crates.nvim",
 			"L3MON4D3/LuaSnip",
 		},
+	},
+	{
+		"Saecki/crates.nvim",
+		event = { "BufRead Cargo.toml" },
+		config = function()
+			require("crates").setup()
+		end,
 	},
 	{ "rcarriga/nvim-notify" },
 	{
@@ -222,9 +228,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"mg979/vim-visual-multi",
-	},
-	{
 		"Wansmer/treesj",
 		keys = { "<space>m", "<space>j", "<space>s" },
 		dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
@@ -233,15 +236,7 @@ require("lazy").setup({
 			})
 		end,
 	},
-	{
-		"NachoNievaG/atac.nvim",
-		dependencies = { "akinsho/toggleterm.nvim" },
-		config = function()
-			require("atac").setup({
-				dir = vim.fn.getcwd(), -- Set dir to the current working directory
-			})
-		end,
-	},
+	{ "nanotee/sqls.nvim" },
 	{ "kristijanhusak/vim-dadbod-completion" },
 	{
 		"kristijanhusak/vim-dadbod-ui",
@@ -270,20 +265,6 @@ require("lazy").setup({
 			}
 			vim.g.db_ui_disable_progress_bar = 1
 		end,
-	},
-	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		build = "cd app && yarn install",
-		init = function()
-			vim.g.mkdp_filetypes = { "markdown" }
-		end,
-		ft = { "markdown" },
-	},
-	{
-		"NStefan002/screenkey.nvim",
-		lazy = false,
-		version = "*", -- or branch = "dev", to use the latest commit
 	},
 	{ "rmagatti/auto-session", config = true },
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
@@ -359,9 +340,7 @@ require("lazy").setup({
 	{
 		"wakatime/vim-wakatime",
 	},
-	{
-		"MunifTanjim/eslint.nvim",
-	},
+
 	{
 		"tpope/vim-dadbod",
 	},
@@ -428,10 +407,6 @@ require("lazy").setup({
 	--	{
 	--	"jose-elias-alvarez/null-ls.nvim",
 	--	},
-	{ "slint-ui/vim-slint" },
-	{
-		"tjdevries/nlua.nvim",
-	},
 	{
 		"mbbill/undotree",
 	},
