@@ -1,5 +1,6 @@
 require("urizen")
 local snacks = require("plugin-config.snacks")
+
 vim.lsp.set_log_level("debug")
 vim.g.db_ui_use_nvim_notify = 1
 vim.g.lazydev_enabled = true
@@ -157,7 +158,10 @@ require("lazy").setup({
 	-- 		require("tiny-inline-diagnostic").setup()
 	-- 	end,
 	-- },
-
+	dev = {
+		reload = true,
+	},
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000, lazy = false },
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
@@ -800,17 +804,17 @@ require("lazy").setup({
 		end,
 	},
 
-	{
-		"folke/tokyonight.nvim",
-		priority = 1000, -- Make sure to load this before all the other start plugins.
-		init = function()
-			vim.cmd.colorscheme("tokyonight")
-			vim.cmd.hi("Comment gui=none")
-		end,
-		config = function()
-			require("folke")
-		end,
-	},
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	priority = 1000, -- Make sure to load this before all the other start plugins.
+	-- 	init = function()
+	-- 		vim.cmd.colorscheme("tokyonight")
+	-- 		vim.cmd.hi("Comment gui=none")
+	-- 	end,
+	-- 	config = function()
+	-- 		require("folke")
+	-- 	end,
+	-- },
 
 	-- Highlight todo, notes, etc in comments
 	{
