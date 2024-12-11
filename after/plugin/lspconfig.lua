@@ -1,7 +1,7 @@
 local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.formatting = true
-vim.print(capabilities.textDocument.formatting)
+
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = { "lua_ls" },
@@ -130,3 +130,9 @@ require("lspconfig").gopls.setup({
 		},
 	},
 })
+
+-- require("lspconfig").r_language_server.setup({
+-- 	cmd = { "R", "--slave", "-e", "languageserver::run()" },
+-- 	filetypes = { "r", "rmd" },
+-- 	root_dir = require("lspconfig").util.root_pattern(".git", "."),
+-- })

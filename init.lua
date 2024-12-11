@@ -1,6 +1,6 @@
 require("urizen")
 local snacks = require("plugin-config.snacks")
-
+vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { fg = "#808080" })
 vim.lsp.set_log_level("debug")
 vim.g.db_ui_use_nvim_notify = 1
 vim.g.lazydev_enabled = true
@@ -161,6 +161,8 @@ require("lazy").setup({
 	dev = {
 		reload = true,
 	},
+	{ "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" },
+	{ "rebelot/kanagawa.nvim" },
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000, lazy = false },
 	{
 		"folke/snacks.nvim",
@@ -272,7 +274,7 @@ require("lazy").setup({
 	},
 	{ "rmagatti/auto-session", config = true },
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
-	{ "mistricky/codesnap.nvim", build = "make" },
+	-- { "mistricky/codesnap.nvim", build = "make" },
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		opts = {},
@@ -616,7 +618,7 @@ require("lazy").setup({
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 			local servers = {
-				clangd = {},
+				-- clangd = {},
 				gopls = {},
 				pyright = {},
 				ts_ls = {},
@@ -804,17 +806,17 @@ require("lazy").setup({
 		end,
 	},
 
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	priority = 1000, -- Make sure to load this before all the other start plugins.
-	-- 	init = function()
-	-- 		vim.cmd.colorscheme("tokyonight")
-	-- 		vim.cmd.hi("Comment gui=none")
-	-- 	end,
-	-- 	config = function()
-	-- 		require("folke")
-	-- 	end,
-	-- },
+	{
+		"folke/tokyonight.nvim",
+		priority = 1000, -- Make sure to load this before all the other start plugins.
+		init = function()
+			vim.cmd.colorscheme("tokyonight")
+			vim.cmd.hi("Comment gui=none")
+		end,
+		config = function()
+			require("folke")
+		end,
+	},
 
 	-- Highlight todo, notes, etc in comments
 	{
